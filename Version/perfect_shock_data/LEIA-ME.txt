@@ -1,0 +1,36 @@
+PERFECT SHOCK DATA - como abrir
+1. Extraia o zip inteiro para uma pasta (nao execute de dentro do zip).
+2. Precisa do Python 3.10+ (python.org, marcando "Add python.exe to PATH").
+   O atalho "python" da Microsoft Store NAO serve. Se nao tiver Python, o iniciar.bat oferece instalar via winget.
+3. Dois cliques em iniciar.bat. O navegador abre em http://127.0.0.1:5000.
+Dados ja carregados (bases_exemplo). Para recarregar do zero: apague data\perfect_shock.db e rode "python carregar_exemplos.py".
+Posicao no catalogo = ordem das linhas da planilha CatalogoAMD (nao ha coluna de pagina/posicao na base).
+
+GITHUB CODESPACES (alternativa sem instalar Python)
+1. Crie um repositorio PRIVADO e envie estes arquivos (o .gitignore ja protege banco e planilhas).
+2. Code > Codespaces > Create codespace. O app sobe sozinho e abre na porta 5000.
+3. Arraste as planilhas para uma pasta bases_exemplo no explorador e rode: python carregar_exemplos.py
+Obs.: o Codespaces gratuito tem limite mensal de horas e os dados ficam na nuvem do GitHub.
+
+ATUALIZAR OS DADOS (menu "Atualização de dados")
+Mantenha o MESMO NOME das planilhas (ex.: "DadosR-D e DES.xlsx", "Compra_de_amostra.xlsx", "CatalogoAMD.xlsx"...). Escolha os arquivos (um ou vários) ou substitua os da pasta bases_exemplo e clique
+em "Verificar a pasta". O sistema lê tudo, compara com o banco e mostra o que falta; ao clicar em "Aplicar" insere só o que não está (backup automático antes). Nada é apagado.
+Em Desenvolvimento, status/fornecedor/amostras são atualizados quando mudam na planilha; em Compra de amostras, só campos vazios são preenchidos (etapa e edições feitas no sistema são preservadas).
+
+DESENHOS (menu "Desenhos")
+Envie arquivos de desenho em qualquer formato (PDF, DWG, DXF, STEP, imagens...), soltando arquivos ou uma pasta. O sistema reconhece o CÓDIGO e a REVISÃO pelo nome do arquivo
+(ex.: AMD0170_REV02.pdf, D-AMD0170 R3.dwg, AMD0108_AMD0109 rev B.pdf) e vincula a catálogo, desenvolvimento e redesenvolvimento. Antes de gravar, mostra a análise para você conferir/corrigir.
+Revisões antigas ficam guardadas; os cadastros mostram só a vigente (maior revisão do código). Sem revisão no nome = próxima revisão automática. Arquivo idêntico ao já cadastrado é ignorado.
+Os arquivos ficam na pasta data\drawings (o backup do sistema copia apenas o banco: copie também essa pasta ao fazer backup).
+Miniaturas: imagens usam Pillow e PDF usa PyMuPDF, se instalados (pip install pillow pymupdf). Sem eles, aparece o ícone do formato.
+
+PLANILHAS NOVAS: na "Atualização de dados", planilhas com nome desconhecido também entram (cada aba vira uma fonte, listada em Fontes e histórico; use "Ver linhas" para consultar).
+
+NOVIDADES (etapa 7)
+- Referência cruzada: planilha CrossCatalogo.xlsx (mesmo nome) carregada em "Atualização de dados". Aparece na ficha do catálogo, na pesquisa por código (tipo "Concorrente") e na Compra de amostras.
+- Controle de status (Em desenvolvimento / Em redesenvolvimento): Pendente validação, Validação reprovada, Pendente desenho do fornecedor, Pendente compras. Vem da planilha quando ela indica;
+  a marcação manual (no detalhe do item ou em lote na lista) prevalece e pode voltar ao automático.
+- Compra de amostras > aba "Pendente de compra": todo item com Pendente compras + referência cruzada (o que cotar) + situação do pedido de amostra; "Criar pedido" já preenche o formulário.
+- Brands: PERFECT (AMD…), BPROAUTO (1BP…), MOTRIO (só números), MOTORCRAFT (base ItensMotorcraft).
+- Configurações: chave de tema claro/escuro (também no botão do topo). Fica gravado no navegador.
+- Desenhos: miniaturas reais (imagens e PDF; PDF precisa de pypdfium2 ou PyMuPDF — o iniciar.bat tenta instalar), visualizador com zoom/tela cheia, setas entre desenhos e comparação de revisões.
